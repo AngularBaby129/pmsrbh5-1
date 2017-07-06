@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta id="viewport" name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+    <script src="../js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/aladdin.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/aladdin.aikeplatform.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/aladdin.ext.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../main.js" type="text/javascript" charset="utf-8"></script>
+    <!--<script src="../commonJS/commonJS.js" type="text/javascript" charset="utf-8"></script>-->
+    <script src="../js/iscroll-probe.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/financing.js" type="text/javascript" charset="utf-8"></script>
+    <title></title>
+   
+    <script type="text/javascript">
+        var clientWidth = document.documentElement.clientWidth,
+                viewport = null,
+                viewportWidth = 'device-width',
+                viewportScale = 1,
+                normalWidth = 750;
+        if (clientWidth > normalWidth) {
+            viewport = document.getElementById('viewport');
+            viewportScale = clientWidth / normalWidth;
+            viewportWidth = normalWidth * (normalWidth / clientWidth);
+            viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+        } else if (clientWidth < normalWidth) {
+            viewport = document.getElementById('viewport');
+            viewportScale = clientWidth / normalWidth;
+            viewportWidth = normalWidth;
+            viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+        }
+         
+    </script>
+</head>
+
+<body>
+
+<section>
+    <div class="grayBar clearfix" id="totalBusiness">共N笔交易</div>
+</section>
+
+<main id='wrapper'>
+    <div  class="container clearfix" >
+        <div class="box clearfix" id="container">
+            <div id="left_div">
+                <div id="left_div1">
+                    <table id="left_table1">
+                        <tr>
+                            <td>客户姓名</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="left_div2">
+                    <table id="left_table2" class="table table-bordered">
+
+                    </table>
+                </div>
+            </div>
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered" style="border:0">
+                            <tr class="firstTR">
+                                <td><div>产品名称</div></td>
+                                <td><div>分成创利</div></td>
+                                <td><div>本月创利</div></td>
+                                <td><div>分成比例</div></td>
+                                <td><div>购买日期</div></td>
+                                <td><div>到期日期</div></td>
+                                <td><div>购买金额</div></td>
+                                <td><div>中收计算类别</div></td>
+                                <td><div>产品模拟收益率</div></td>
+                                <td><div>产品引导系数</div></td>
+                                <td><div>销售资质</div></td>
+                                <td><div>客户号</div></td>
+                                <td><div>交易卡号</div></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2">
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!--<footer>
+	<div class="footerName" style="height: 50px; display: flex;display: -webkit-flex;align-items: flex-start;">
+		<button id="prev" style="height: 50px;width: 80px;border: 1px solid #54B9FF;border-radius: 15px;display: inline-block;">PREV</button>
+		<button id="next" style="height: 50px;width: 100px;border: 1px solid #54B9FF;border-radius: 15px;display: inline-block;">NEXT</button>
+	</div>
+</footer>-->
+<!--<footer>
+    <div class="loadMore">上拉加载...</div>
+</footer>-->
+
+
+
+</body>
+</html>

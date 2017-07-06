@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta id="viewport" name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mine.css"/>
+    <script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../js/aladdin.min.js"></script>
+    <script type="text/javascript" src="../js/aladdin.aikeplatform.js"></script>
+    <script type="text/javascript" src="../js/aladdin.ext.js"></script>
+    <script src="../main.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../commonJS/commonJS.js"></script>
+    <script type="text/javascript" src="js/obligation.js"></script>
+    <title></title>
+    <style>
+        .contenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
+
+        .wrap {
+            padding-top: 0;
+        }
+        .spanScore{
+        	position: absolute;
+        	right:58px;
+        }
+    </style>
+    <script type="text/javascript">
+        var clientWidth = document.documentElement.clientWidth,
+                viewport = null,
+                viewportWidth = 'device-width',
+                viewportScale = 1,
+                normalWidth = 748;
+        if (clientWidth > normalWidth) {
+            viewport = document.getElementById('viewport');
+            viewportScale = clientWidth / normalWidth;
+            viewportWidth = normalWidth * (normalWidth / clientWidth);
+            viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+        } else if (clientWidth < normalWidth) {
+            viewport = document.getElementById('viewport');
+            viewportScale = clientWidth / normalWidth;
+            viewportWidth = normalWidth;
+            viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+        }
+        var rightButtonCallback = function () {
+            aladdin.navigator.forward({
+                title: '问题反馈',
+                url: '/sicaih5/dist/module/mine.html#/problemFeedback?type=obligation',
+                // 默认情况下即是`webapp`，可以不传
+                type: 'webapp',
+                header: {
+                    visible: true
+                }
+                // 如果使用默认的模板，不需要传递
+            }, function (err) {
+                if (err) {
+                    aladdin.toast.show({message: err.message});
+                }
+            })
+        };
+        rightButtonCallback.keep = true;
+
+        var opts = {
+            title: "责任积分",
+            color: "#000000",
+            backgroundColor: "#FFFFFF",
+            fontSize: '16px',
+            underlineVisible: true,
+            leftButtonVisible: true,
+            leftButtonText: '',
+            leftButtonFontSize: '16px',
+            rightButtonVisible: true,
+            rightButtonText: "问题反馈",
+            rightButtonTextColor: "#34a1fc",
+            rightButtonFontSize: '16px',
+            rightButtonBackgroundColor: "#ffffff",
+            leftButtonIcon: "/sicaih5/dist/static/back.png",
+            leftButtonCallback: function () {
+                aladdin.navigator.back()
+            },
+            rightButtonCallback: rightButtonCallback
+
+
+        };
+        aladdin.header.config(opts, function (err) {
+            if (err) {
+                aladdin.toast.show({message: err.message});
+            }
+        })
+
+    </script>
+</head>
+<body>
+<!-- <header>
+    <nav class="navbar">
+        <div class="leftButton" onclick="leftClick">
+            <i v-if="leftIconShow"><img src="../img/back@2x.png"/></i><span v-text="leftText"></span>
+        </div>
+        <div class="rightButton" onclick="rightClick">
+            <span>问题反馈</span>
+        </div>
+        <div class="title">
+            <slot>
+                <span v-if="typeof title === 'string'" onclick="titleClick">责任积分</span>
+                <div v-else class="titleContent">
+                    <div v-for="(item, index) in title" :class="{active: item.active}"
+                         @click="titleClick(item.name, item.onclick)" v-text="item.title"
+                    ></div>
+        </div>
+        </slot>
+        </div>
+    </nav>
+</header>-->
+
+<div class=" resScore">
+    <div class="main ">
+        <div class="container">
+            <div class="modal" style="display: none;">
+                <div style="width:600px;height:660px;background:#efefef;margin:0 auto;border-radius:15px">
+                    <!-- 头部选择操作按钮 -->
+                    <div class="contenter " style="height:110px;border-bottom: 1px solid rgba(0,0,0,0.1)">
+                        <div onclick="leftButtonAction()" class="contenter leftCon" style="width:40px;height:40px">
+                            <img src="../images/leftArrow.png" style="width:40px;">
+                        </div>
+                        <div class="contenter dateText" style="width:300px;height:40px;font-size: 30px"></div>
+                        <div onclick="rightButtonAction()" class="contenter rightCon" style="width:40px;height:40px">
+                            <img src="../images/rightArrow.png" style="width:40px;">
+                        </div>
+                    </div>
+
+                    <!--月份排列-->
+                    <div class="monthList" style="overflow:hidden;border-bottom: 1px solid rgba(0,0,0,0.1)">
+
+                    </div>
+                    <div class="contenter" onclick="cancelButtonAction()"
+                         style="overflow:hidden;padding-top:10px; width:600px;height:88px;background-color: transparent">
+                        取消
+                    </div>
+                </div>
+            </div>
+            <div class="scrollview">
+                <div class="date">
+                    <div class="dateSelect">
+                        <div class="leftSelect" onclick="leftDateSelect()">
+                            <img src="../images/leftArrow.png">
+                        </div>
+                        <div class="dateText showDate"></div>
+                        <div class="rightSelect" onclick="rightDateSelect()">
+                            <img src="../images/rightArrow.png">
+                        </div>
+
+                    </div>
+                    <div id="score" class="score">
+                        --
+                    </div>
+                </div>
+                <div class="dataUpdate" id="dateUpdate">最近更新日期T+1</div>
+                <div class="customernteraction">
+                    <div class="section section_a">
+									<span>
+                            <span class="sectionTitle">客户互动</span>
+									<img src="../img/question.png">
+									</span>
+
+                    </div>
+                    <div class="cell" id='khhd'>
+                        <ul id="liParent">
+
+                            <li id="important" onclick="gotoEveryPage('msgRemind')">
+                                <span class="spanTitle">重要事项提醒</span>
+                                <span class="spanData" id="zysx">(0/0)</span>
+                                <span class="spanPersent" style="display:none" id="zysxP">0%</span>
+											<span class="spanScore" id="zysxS">
+											<span>--</span>
+											
+											</span>
+											<img src="../img/arrow.png" id="image1">
+											
+                            </li>
+                            <li id="greeting" onclick="gotoEveryPage('msgRegular')">
+                                <span class="spanTitle">定期问候</span>
+                                <span class="spanData" id="dqwh">(0/0)</span>
+                                <span class="spanPersent" style="display:none" id="dqwhP">0%</span>
+											<span class="spanScore" id="dqwhS">
+											<span>--</span>
+											
+											</span>
+											<img src="../img/arrow.png" id="image2">
+                            </li>
+                            <li id="business" onclick="gotoEveryPage('optyCount')">
+                                <span class="spanTitle">商机追踪</span>
+                                <span class="spanData" id="sjzz">(0/0)</span>
+                                <span class="spanPersent" style="display:none" id="sjzzP">0%</span>
+											<span class="spanScore" id="sjzzS">
+											<span>--</span>
+											
+											</span>
+											<img src="../img/arrow.png" id="image3">
+                            </li>
+                            <li id="interview" onclick="gotoEveryPage('inPersonCust')">
+                                <span class="spanTitle">面访</span>
+                                <span class="spanData" id="mf">(0/0)</span>
+                                <span class="spanPersent" style="display:none" id="mfP">0%</span>
+											<span class="spanScore" id="mfS">
+											<span>--</span>
+											</span>
+											<img src="../img/arrow.png" id="image4">
+
+                            </li>
+                            <li id="campaign" onclick="gotoEveryPage('actionOrganize')">
+                                <span class="spanTitle">活动组织</span>
+                                <span class="spanData" id="campaignCondition">(0/0)</span>
+                                <span class="spanPersent" style="display:none" id="campaignPercent">0%</span>
+											<span class="spanScore" id="campaignScore">
+                                     		<span>--</span>
+                                     		
+											</span>
+											<img src="../img/arrow.png" id="image5">
+                            </li>
+                            <li id="survey" onclick="gotoEveryPage('salesmanSurvey')">
+                                <span class="spanTitle">业务员调研</span>
+                                <span class="spanData" id="surveyCondition">(0/0)</span>
+                                <span class="spanPersent" style="display:none" id="surveyPercent">0%</span>
+											<span class="spanScore" id="surveyScore">
+                                     		<span>--</span>
+                                     		
+											</span>
+											<img src="../img/arrow.png" id="image6">
+                            </li>
+                            <li id="clientBusiness" onclick="gotoEveryPage('custOpty')">
+                                <span class="spanTitle">承接客户商机</span>
+                                <span class="spanData" id="clientbusinessCondition">(0/0)</span>
+                                <span class="spanPersent" style="display:none" id="clientbusinessPercent">0%</span>
+											<span class="spanScore" id="clientbusinessScore">
+                                     		<span>--</span>
+                                     		
+											</span>
+											<img src="../img/arrow.png" id="image7">
+                            </li>
+                            <li id="otherBusiness" onclick="gotoEveryPage('salesmanOpty')">
+                                <span class="spanTitle">其他商机</span>
+                                <span class="spanData" id="otherbusinessCondition">(0/0)</span>
+                                <span class="spanPersent" style="display:none" id="otherbusinessPercent">0%</span>
+											<span class="spanScore" id="otherbusinessScore">
+                                     		<span>--</span>
+                                     		
+											</span>
+											<img src="../img/arrow.png" id="image8">
+                            </li>
+                            <li onclick="openShareScoreHtml()" id='fxxy'>
+                                <span class="spanTitle">分享响应</span>
+											<span class="fxspanScore">
+                                     		<span class="" id="sharePoints">--</span>
+											<img src="../img/arrow.png" id="image">
+											</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="quality">
+                    <div class="section section_b">
+									<span>
+                            <span class="sectionTitle">品质</span>
+									<img src="../img/question.png">
+									</span>
+                    </div>
+                    <div class="cell" id='quanlity'>
+                        <ul>
+                            <li id="exmine">
+                                <span class="spanTitle">业务员满意度调查</span>
+                                <span class="spanScore" id="ywdc">--</span>
+                            </li>
+                            <li id="risk">
+                                <span class="spanTitle">合规/风险案件</span>
+                                <span class="spanScore" id="hgfx">--</span>
+                            </li>
+                            <li id="complain">
+                                <span class="spanTitle">客户投诉</span>
+                                <span class="spanScore" id="khts">--</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="evaluate">
+                    <div class="section section section_c">
+									<span @click="clickEvaluate">
+                            <span class="sectionTitle">主管评价</span>
+									<img src="../img/question.png">
+									</span>
+                    </div>
+                    <div class="cell" id='zgpj'>
+                        <ul>
+                            <li>
+                                <span class="spanTitle">主管评分</span>
+                                <span class="spanScore" id="spanScore1">--</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="customernteractionExplainContainer teraction" @touchmove.self.prevent style="display: none;">
+                <div class="customernteractionExplainScroll showMask1">
+                    <div class="customernteractionExplainHeader" @touchmove.prevent>
+									<span class="customernteractionExplainHeaderSpan">
+                           				客户互动积分说明
+                       				</span>
+                    </div>
+                    <div class="customernteractionExplainContent">
+                        <div class="customernteractionExplainUl">
+                            <ul>
+                                <li class="customernteractionExplainContainerLi" id="zysxsm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				重要事项提醒
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="zysxCt">
+                                        				提醒消息类型为除"生日提醒"外的提醒；<br/>
+                                        				本月跟进率>=--,则本月获得重要事项提醒的--分；<br/>
+                                        				本月跟进率=当月创建事项已跟进数的客户数/当月创建事项的客户数。
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi" id="dqwhsm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				定期问候
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="dqwhCt">
+                                        				提醒消息类型为"生日提醒"；<br/>
+                                        				本月跟进率>=--,则本月可获得定期问候的--分；<br/>
+                                        				本月跟进率=当月创建事项已跟进的客户数 /当月创建事项的客户数。
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi" id="sjzzsm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				商机追踪
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="sjzzCt">
+														本月商机跟进率>=--，则本月可获得--分；<br/>
+														本月跟进率=截止日期为当月的已跟进商机个数 /截止日期为当月的商机总个数。
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi" id="mfsm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				面访
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="mfCt">
+														管户最近三个月有一次面访记录即生效；<br/>
+                                        				近三个月面访率>=--,则本月可获得--分；<br/>
+                                        				近三个月面访率<=--,得分=面访率*--分；<br/>
+                                        				面访率=已完成的面访客户数 /需要完成的面访客户数；
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi" id="hdzzsm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				活动组织
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="hdzzCt">
+                                        				网点现场活动及场外活动组织/场（覆盖>=--名客户），每个审批通过后活动可得--分，可累加
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi" id="ywdysm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				业务员调研
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="ywdyCt">
+                                        				每个审批通过后的调研可得--分，可累加
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi" id="khsjsm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				承接客户商机
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="khsjCt">
+                                        				本月承接客户商机率>=--，则本月可获得商机追踪的--分</br>
+                                                        本月跟进率=截止日期为当月的已跟进商机个数/截止日期为当月的商机总个数
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi" id="qtsjsm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				其他商机
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="qtsjCt">
+                                        				本月其他商机率>=--，则本月可获得商机追踪的--分；</br>
+                                                        本月跟进率=截止日期为当月的已跟进商机个数/截止日期为当月的商机总个数。
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				分享响应
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan" id="fxxyCt">
+                                        				1.当日分享内容数大于等于--且当日获得累计点击数大于等于--,得--分。<br/>
+                                        				2.当日分享内容数大于等于--且当日获得累计点击人数大于等于--，得--分.<br/>
+                                        				要尽量一个内容分享给多个用户哦！
+                                    				</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="customernteractionExplainFooter" @touchmove.prevent>
+                        <div class="customernteractionExplainFooterButton">
+
+										<span class="customernteractionExplainFooterButtonSpan"
+                                              onclick="hiddenCustomernteractionExplainModals()">
+                           									知道了
+                       					</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="customernteractionExplainContainer  character" @touchmove.self.prevent style="display: none;">
+                <div class="customernteractionExplainScroll showMask2">
+                    <div class="customernteractionExplainHeader" @touchmove.prevent>
+									<span class="customernteractionExplainHeaderSpan">
+                           				品质积分说明
+                       				</span>
+                    </div>
+                    <div class="customernteractionExplainContent">
+                        <div class="customernteractionExplainUl">
+                            <ul>
+                                <li class="customernteractionExplainContainerLi" id="ywdcsm">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				业务员满意度调查
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan">
+                                        				有预约开户（或办理业务）的寿险客户所对应的业务员在其代理人A中投诉则扣10分
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				合规/风险案件
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan">
+                                        				出现合规案件扣分，按照红黄蓝牌扣分。红牌-20,黄牌-15,蓝牌-10
+                                    				</span>
+                                    </div>
+                                </li>
+                                <li class="customernteractionExplainContainerLi">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				客户投诉
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan">
+                                        				产生客户投诉并生效，会在-20~0内扣分
+                                    				</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="customernteractionExplainFooter" @touchmove.prevent>
+                        <div class="customernteractionExplainFooterButton">
+
+										<span class="customernteractionExplainFooterButtonSpan"
+                                              onclick="hiddenCustomernteractionExplainModal()">
+                           									知道了
+                       					</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="customernteractionExplainContainer  comment" @touchmove.self.prevent style="display: none;">
+                <div class="customernteractionExplainScroll showMask3">
+                    <div class="customernteractionExplainHeader" @touchmove.prevent>
+									<span class="customernteractionExplainHeaderSpan">
+                           				主管评分
+                       				</span>
+                    </div>
+                    <div class="customernteractionExplainContent">
+                        <div class="customernteractionExplainUl">
+                            <ul>
+                                <li class="customernteractionExplainContainerLi">
+                                    <div style="margin-bottom: 5px;">
+													<span class="customernteractionExplainTitleSpan">
+                                        				
+                                    				</span>
+                                    </div>
+                                    <div>
+													<span class="customernteractionExplainContentSpan">
+													主管对行员本月表现在0~20内打分。
+                                    				</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="customernteractionExplainFooter" @touchmove.prevent>
+                        <div class="customernteractionExplainFooterButton">
+
+										<span class="customernteractionExplainFooterButtonSpan"
+                                              onclick="hiddenCustomernteractionExplainModal1()">
+                           									知道了
+                       					</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

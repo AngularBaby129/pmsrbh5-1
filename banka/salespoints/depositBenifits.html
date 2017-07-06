@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script src="../js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/aladdin.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/aladdin.aikeplatform.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/aladdin.ext.js" type="text/javascript" charset="utf-8"></script>
+		 <script src="../main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/depositBenifits.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../commonJS/commonJS.js" type="text/javascript" charset="utf-8"></script>-->
+		<title></title>
+		<style>
+
+			
+			.contenter {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: transparent;
+			}
+			
+			body {
+				overflow: auto;
+			}
+			.aladdin-header-title{
+				width: 220px;
+				margin-left: -110px;
+			}
+		</style>
+		<script type="text/javascript">
+			var clientWidth = document.documentElement.clientWidth,
+				viewport = null,
+				viewportWidth = 'device-width',
+				viewportScale = 1,
+				normalWidth = 748;
+			if(clientWidth > normalWidth) {
+				viewport = document.getElementById('viewport');
+				viewportScale = clientWidth / normalWidth;
+				viewportWidth = normalWidth * (normalWidth / clientWidth);
+				viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+			} else if(clientWidth < normalWidth) {
+				viewport = document.getElementById('viewport');
+				viewportScale = clientWidth / normalWidth;
+				viewportWidth = normalWidth;
+				viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+			}
+
+
+			var opts = {
+				title: "投资理财创利",
+				color: "#000000",
+				backgroundColor: "#FFFFFF",
+				fontSize: '16px',
+				underlineVisible: true,
+				leftButtonText: '',
+				leftButtonVisible: true,
+				leftButtonFontSize: '16px',
+				rightButtonVisible: false,
+				rightButtonTextColor: "#34a1fc",
+				//rightButtonText:"问题反馈",
+				rightButtonText: "",
+				rightButtonFontSize: '16px',
+				rightButtonBackgroundColor: "#ffffff",
+				leftButtonIcon:"/sicaih5/dist/static/back.png",
+				leftButtonCallback:function(){aladdin.navigator.back()}
+					//rightButtonCallback:rightButtonCallback
+
+			}
+			aladdin.header.config(opts, function(err) {
+				if(err) {
+					aladdin.toast.show({
+						message: err.message
+					});
+				}
+			})
+		</script>
+	</head>
+
+	<body>
+		<main>
+			<div class='_total' id="dateUpdate">最近更新日期T+1</div>
+			<div class='_total'>共创利<span id ="touzi_total"></span>元</div>
+			<div class="cell" style='background-color: white;'>
+				<ul>
+					<li>
+						<span class="spanTitle" style="margin-left: 0px;">类型</span>
+						<span class="spanScore1" style="margin-right: 0px;">创利</span>
+					</li>
+					<li onclick="gotoDetailProfitability('BBLC')">
+						<span class="spanTitle" >保本理财</span>
+						<span class="spanScore1" id ="baoben"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('FBBLC')">
+						<span class="spanTitle" >非保本理财</span>
+						<span class="spanScore1" id ="feibaoben"></span>
+					</li>
+					<li  onclick="gotoDetailProfitability('RJZG')">
+						<span class="spanTitle">日均资管</span>
+						<span class="spanScore1" id ="daymoney"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('YCXZG')">
+						<span class="spanTitle" >一次性资管</span>
+						<span class="spanScore1" id ="disposable"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('JJ')">
+						<span class="spanTitle" >基金</span>
+						<span class="spanScore1" id ="fund"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('HJ')">
+						<span class="spanTitle" >黄金</span>
+						<span class="spanScore1" id ="gold"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('JSLC')">
+						<span class="spanTitle" >券商理财</span>
+						<span class="spanScore1" id ="juanshang"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('YB')">
+						<span class="spanTitle" >银保</span>
+						<span class="spanScore1" id ="moneyprotect"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('JGXCP')">
+						<span class="spanTitle" >结构性产品</span>
+						<span class="spanScore1" id ="struture" ></span>
+					</li>
+					<li onclick="gotoDetailProfitability('XT')">
+						<span class="spanTitle" >信托</span>
+						<span class="spanScore1" id ="trust"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('GZ')">
+						<span class="spanTitle" >国债</span>
+						<span class="spanScore1" id ="nationaldebt"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('WH')">
+						<span class="spanTitle" >外汇</span>
+						<span class="spanScore1" id ="waihui"></span>
+					</li>
+				</ul>
+			</div>
+		</main>
+	</body>
+
+</html>

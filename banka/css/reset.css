@@ -1,0 +1,321 @@
+@charset "utf-8";
+/* CSS 重写默认样式 */
+*{ -webkit-overflow-scrolling: auto; font-family: "平方简细体","冬青简体",Arial;}
+body, div, ol, dl, dt, dd, ul, li, table, th, tr, td, h1, h2, h3, h4, h5, h6, p, form, input, button, img, strong, em {
+    padding: 0; margin: 0; border: 0; font-style: normal;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids,个人感觉是低版本的安卓，4.0以下 */
+}
+
+li, dd, dt { list-style-type: none;}
+ol, ul, dl { list-style: none;}
+img { vertical-align: top;}
+table { border-collapse: collapse; border-spacing:0;  }
+a{ color: #000; text-decoration: none; outline: 0;}
+/*::-webkit-scrollbar {width: 0px;} !* 隐藏wekkit内核浏览器的滚动条,但是可以滚动*!*/
+::-webkit-input-placeholder { color: #999;}
+::-moz-placeholder { color: #999; } /* firefox 19+ */
+:-ms-input-placeholder { color: #999; } /* ie */
+:-moz-placeholder { color: #999;} /* firefox 4 to 18 */
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0 none; margin: 0; padding: 0;}
+input, select, option, button, textarea {
+    font-size: 100%; vertical-align: middle; outline: 0 none; border-radius: 0px; border: none; background: transparent;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+}
+
+/* 清除浮动样式 */
+.clear { clear: both; height: 0; width: 100%;}
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0;}
+.clearfix { zoom: 1; clear: both;}
+.left { float: left;}
+.right { float: right;}
+
+* {box-sizing: border-box}
+html, body{
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    overflow: hidden;
+    position: relative;
+}
+/* 屏幕适配 */
+@media screen and (max-width:360px){
+    html{ font-size: 14px!important;}
+}
+@media screen and (min-width:361px) and (max-width:480px){
+    html{ font-size: 16px!important;}
+}
+@media screen and (min-width:481px) and (max-width:640px){
+    html{ font-size: 18px!important;}
+}
+@media screen and (min-width:641px) and (max-width:750px){
+    html{ font-size: 20px!important;}
+}
+@media screen and (min-width:751px){
+    html{ font-size: 24px!important;}
+}
+
+
+/*表格开始*/
+.container{
+    width: 100%;
+}
+
+#left_div {
+    width: 180px;
+    float: left;
+    border-right:1px solid #d1d1d1;
+}
+
+#left_div1 {
+    /*width: 100%;*/
+}
+
+#left_div2 {
+    /*margin-top:-20px;*/
+    width: 100%;
+    /*height:100%;*/
+    height: 1106px;
+    overflow: hidden;
+    
+}
+
+#left_table1 tr{
+    padding: 40px 30px;
+}
+#left_table1 td {
+    display: inline-block;
+    background: #54b9ff;
+    text-align: center;
+    height:108px;
+    width: 180px;
+    line-height: 108px;
+    text-align: center;
+    color:#fefefe;
+    font-size: 30px;
+    /*padding:20px 20px;*/
+}
+#left_table2{
+	transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+    transition-duration: 0ms;
+    display: inline-block;
+
+}
+#left_table2 tr{
+    padding: 40px 30px;
+    border-bottom: 1px solid #d1d1d1;
+}
+#left_table2 th {
+    display: inline-block;
+    width: 180px;
+    height:108px;
+    line-height: 108px;
+    text-align: center;
+    background-color: #fff;
+    color:#000;
+    font-size: 30px;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+#right_div {
+    float: left;
+}
+
+#right_div1 {
+    width: 100%;
+    overflow: hidden;
+
+}
+
+#right_divx {
+    /*width: 900px;*/
+}
+
+#right_div2 {
+    /*margin-top:-20px;*/
+    width: 100%;
+    height:1106px;
+    overflow: hidden;
+
+}
+#right_div2::-webkit-scrollbar{
+    display: none;
+}
+
+#right_table1 {
+	transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+    transition-duration: 0ms;
+	width: 100%;
+    white-space: nowrap;
+}
+#right_table1 tr{
+    /* padding: 40px 0; */
+}
+#right_table2 {
+    /**width和max-width一起写，手机浏览器打开也能固定长度**/
+    width: 100%;
+    white-space: nowrap;
+}
+
+#right_table1 td {
+    background: #54b9ff;
+    text-align: center;
+   	/* width: 5%; */
+    height:108px;
+    color:#fefefe;
+    font-size: 30px;
+    /* border-right:2px solid #54b9ff; */
+    padding:0px 66px 0px 50px;
+}
+
+#right_table2 tr{
+    padding:14px 0px 13px 0px;
+    border-bottom: 1px solid #d1d1d1;
+}
+#right_table2 td {
+    width: 5%;
+    height:108px;
+    line-height: 108px;
+    background: #ffffff;
+    text-align: center;
+    /*border: 1px solid #000;*/
+    font-size: 30px;
+    color:#000;
+    padding:0px 66px 0px 50px;
+    word-break: break-all;
+    border-bottom:1px solid #d1d1d1;
+}
+/*表格结束*/
+.grayBar{
+    height: 60px;
+    line-height: 60px;
+    color:#999999;
+    background-color: #f5f5f5;
+    font-size: 20px;
+    text-align: center;
+}
+/*交易详情开始*/
+.showBox{
+    width: 100%;
+    /*height:100%;*/
+    background-color: #f5f5f5;
+}
+.nameBox{
+    height: 176px;
+    background-color: #f5f5f5;
+    padding:20px 0;
+}
+
+.topName{
+    width: 690px;
+    height: 136px;
+    background-color: #54b9ff;
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 30px 0 30px 30px;
+}
+
+.topName .name{
+    font-size: 32px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.topName .productName{
+    font-size: 24px;
+    color: #fff;
+    /*padding-top: 20px;*/
+}
+
+.topDetails{
+    width: 100%;
+    /*border-bottom:1px solid #adadad;*/
+    background-color: #fff;
+}
+.topDetails ul{
+    border-bottom: 1px solid #ebebeb;
+    padding: 30px 0;
+
+}
+.topDetails li{
+    float:left;
+    width: 25%;
+    font-size: 26px;
+    text-align: center;
+    color:#f37938;
+    word-break: break-all;
+    padding:0 20px;
+}
+
+.topDetails li div{
+    /*height:50px;*/
+    /*margin-top: 20px;*/
+    color:#999;
+    font-size: 20px;
+    padding-top: 20px;
+    word-break: break-all;
+}
+
+.downDetails{
+    width: 100%;
+    /*border-bottom:1px solid #adadad;*/
+    /*margin-top: 50px;*/
+    background-color: #fff;
+}
+.downDetails ul{
+    border-bottom: 1px solid #ebebeb;
+    padding: 30px 0;
+
+}
+.downDetails li{
+    float:left;
+    width: 33.33%;
+    font-size: 26px;
+    color:#f37938;
+    word-break: break-all;
+    padding:0 20px;
+    /*height:100px;*/
+    /*line-height: 80px;*/
+    text-align: center;
+}
+.downDetails li div{
+    color:#999;
+    font-size: 20px;
+    padding-top: 20px;
+    word-break: break-all;
+}
+/*交易详情结束*/
+
+/*上拉加载开始*/
+.loadMore{
+    height:60px;
+    line-height: 60px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    color:#999;
+    background-color: #f5f5f5;position: absolute;
+    bottom: 0;
+}
+
+.loading{
+    -webkit-transform: rotate(0deg) translateZ(0);
+    -webkit-transition-duration: 0s;
+    -webkit-animation-name: loading;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.flip{
+    transform: rotate(360deg);
+}
+._total{
+    height:40px;
+    line-height:40px;
+    text-align: center;
+    font-size: 22px;
+    color:#999;
+}
+/*上拉加载结束*/

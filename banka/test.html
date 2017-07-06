@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+		<title></title>
+		<style>
+			.navbar * {
+				box-sizing: border-box;
+			}			
+			.navbar {
+				width: 100%;
+				height: 90px;
+				padding: 20px 21px 0;
+				/*position: absolute;
+				top: 0;
+				left: 0;*/
+				z-index: 900;
+				border-bottom: 1px solid #d1d1d1;
+				line-height: 88px;
+				background-color: #fff;
+			}
+			
+			.navbar .title {
+				height: 90px;
+				color: #000000;
+				font-size: 1.8rem;
+				text-align: center;
+				position: relative;
+				z-index: 901;
+			}
+			
+			.navbar .titleContent {
+				/*position: absolute; top: 8.5px; right: 0;*/
+				display: inline-block;
+				vertical-align: middle;
+				height: 60px;
+				border: 1px solid #f37938;
+				border-radius: 30px;
+			}
+			
+			.navbar .titleContent div {
+				float: left;
+				width: 199px;
+				height: 60px;
+				margin-top: -1px;
+				/*border: 1px solid #f37938;*/
+				border-radius: 30px;
+				font-size: 1.4rem;
+				line-height: 60px;
+			}
+			
+			.navbar .titleContent div.active {
+				color: #fffefe;
+				background-color: #f37938
+			}
+			
+			.navbar .leftButton,
+			.navbar .rightButton {
+				height: 87px;
+				line-height: 87px;
+				position: absolute;
+				z-index: 902;
+			}
+			
+			.navbar .leftButton {
+				left: 21px;
+			}
+			
+			.navbar .rightButton {
+				right: 21px;
+			}
+			
+			.navbar .leftButton i,
+			.navbar .rightButton i {
+				display: inline-block;
+				vertical-align: middle;
+				text-align: center;
+				line-height: 44px;
+				width: 44px;
+				height: 44px;
+			}
+			
+			.navbar .leftButton i img,
+			.navbar .rightButton i img {
+				line-height: 44px;
+				vertical-align: middle;
+			}
+			
+			.navbar .leftButton span,
+			.navbar .rightButton span {
+				vertical-align: middle;
+				font-size: 1.2rem;
+				color: #54b9ff;
+			}
+		</style>
+		<script type="text/javascript" src="jquery.min.js"></script>
+  		<script type="text/javascript" src="main.js"></script>
+  		<!-- <script type="text/javascript" src="aladdin.min.js"></script>
+  		<script type="text/javascript" src="aladdin.aikeplatform.js"></script> -->
+		<script type="text/javascript">
+			var clientWidth = document.documentElement.clientWidth,
+				viewport = null,
+				viewportWidth = 'device-width',
+				viewportScale = 1,
+				normalWidth = 748;
+			if(clientWidth > normalWidth) {
+				viewport = document.getElementById('viewport');
+				viewportScale = clientWidth / normalWidth;
+				viewportWidth = normalWidth * (normalWidth / clientWidth);
+				viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+			} else if(clientWidth < normalWidth) {
+				viewport = document.getElementById('viewport');
+				viewportScale = clientWidth / normalWidth;
+				viewportWidth = normalWidth;
+				viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+			}
+			
+
+	           /*  aladdin.aike_tool.getTicket(
+	                    function (error,ticket) {
+	                        if(error){
+	                            alert("获取失败");
+	                        }else{
+	                            alert("ticket:"+ticket);
+	                        }
+	                    }
+	                ); */
+	                var LocString=String(window.document.location.href);
+	                $(function() {
+	                   /*  aladdin.aike_tool.getTicket(
+	                            function (error,ticket) {
+	                                if(error){
+	                                    alert("获取失败");
+	                                }else{
+	                                    alert("ticket:"+ticket);
+	                                }
+	                            }
+	                        ); */
+	                var dataTemp;
+	        			var ticket = GetQueryString("ticket");
+	        			if(ticket!="flag"){
+	        				dataTemp = "ticket="+ticket;
+	        			}
+	                    var umAccount = GetQueryString("umAccount");
+	                    if(umAccount!="flag"){
+	                    	dataTemp = dataTemp+"&umAccount="+umAccount;
+	        			}
+	                    var date = GetQueryString("date");
+						if(date!="flag"){
+							dataTemp = dataTemp+"&date="+date;
+	        			}
+	                    var orgId = GetQueryString("orgId");
+	                    if(orgId!="flag"){
+	                    	dataTemp = dataTemp+"&orgId="+orgId;
+	        			}
+	                    var actionDefineName = GetQueryString("actionDefineName");
+	                    if(actionDefineName!="flag"){
+	                    	dataTemp = dataTemp+"&actionDefineName="+actionDefineName
+	        			}
+	                    alert(dataTemp);
+	        			/* aladdin.aike_tool.getTicket(
+	        			        function (error,ticket) {
+	        			            if(error){
+	        			                alert("获取失败");
+	        			            }else{
+	        			            	alert("ticket:"+ticket); */
+	        			            	$.ajax({
+	        	                            type: "POST",
+	        	                            url: webroot+"/dutyPoints/listDetails.do",
+	        	                            /* data: dataTemp, */
+	        	                            //url: "http://10.14.217.165:8080/admin/dictionary/getBankerType.do",
+	        	                            //url: "http://localhost:81/test.json",
+	        	                            //dataType:"jsonp",
+	        	                            //jsonp:"callback",
+	        	                           beforeSend: function(request) {
+	        	                            	//brcpSessionTicket
+	        	                            	//deviceId
+	        	                            	request.setRequestHeader("brcpEaSessionTicket",  ticket); 
+	        	                                //request.setRequestHeader("brcpEaDeviceId", "98764"); 
+	        	                                //request.setRequestHeader("brcpEaSessionTicket",  ticket); 
+	        	                                //request.setRequestHeader("brcpEaDeviceId", deviceId); 
+	        	                            }, 
+	        	                            success: function(result) {
+	        	                            	alert("测试");
+	        	                            	alert(result);
+	        	                            	//result = eval("("+result+")");
+	        	                            	//alert(result);
+	        	                            	//alert(result.responseMsg);
+	        	                            	//alert("1223456");
+	        	                                //alert(result.datas);
+	        	                            },
+	        	                            error:function(result){s
+	        	                            	alert("通讯异常");
+	        	                            }
+	        	                        });
+	        			            /*     
+	        			            }
+	        			        }
+	        			    ); */
+	                        
+	                    function GetQueryString(str){
+	                        var rs=new RegExp("(^|)"+str+"=([^&]*)(&|$)","gi").exec(LocString),tmp;
+	                        if(tmp=rs)return tmp[2];
+	                        return "flag";
+	                        } 
+	                });
+		</script>
+	</head>
+
+	<body>
+		<header>
+			<nav class="navbar">
+				<div class="leftButton" onclick="leftClick">
+					<i v-if="leftIconShow"><img src="img/back@2x.png"/></i><span v-text="leftText"></span>
+				</div>
+				<div class="rightButton" onclick="rightClick">
+					<span>问题反馈</span>
+				</div>
+				<div class="title">
+					<slot>
+						<span v-if="typeof title === 'string'" onclick="titleClick">责任积分</span>
+						<!--<div v-else class="titleContent">
+		                    <div v-for="(item, index) in title" :class="{active: item.active}"
+		                         @click="titleClick(item.name, item.onclick)" v-text="item.title"
+		                    ></div>-->
+				</div>
+				</slot>
+				</div>
+			</nav>
+		</header>
+			<div class=" resScore">
+				<div class="main ">
+					<div class="container">
+						<!--<div class="modal" v-if="showDateSelect">
+							<ScoreDateSelect :date="date" @cancel="showDateSelect=false" @selectMonth="selectMonth"></ScoreDateSelect>
+						</div>-->
+						<div class="scrollview">
+							<div class="date">
+								<div class="dateSelect">
+									<div class="leftSelect" onclick="leftDateSelect">
+										<img src="img/leftArrow.png">
+									</div>
+									<div class="dateText" onclick="showDateSelectComponent">2017-04</div>
+									<div class="rightSelect" onclick="rightDateSelect">
+										<img src="img/rightArrow.png">
+									</div>
+
+								</div>
+								<div class="score">
+									36
+								</div>
+							</div>
+							<div class="customernteraction">
+								<div class="section">
+									<span onclick="clickCustomernteraction">
+                            <span class="sectionTitle">客户互动</span>
+									<img src="img/question.png">
+									</span>
+
+								</div>
+								<div class="cell">
+									<ul>
+										<li  onclick="clickDetail(item)">
+											<span class="spanTitle">重要事项提醒</span>
+            			                    <span class="spanData">(8/100)</span>
+			                                <span class="spanPersent" :class="item | getColorClass">8%</span>
+											<span class="spanScore">
+                                     		<span>+0</span>
+											<!--<img @click="" src="../images/arrow.png">-->
+											</span>
+
+											<!--<span v-else-if="item.actionDefineName=='面访'" class="spanScore1">
+                                     <span>{{item.points}}</span>
+											</span>-->
+
+											<!--<span v-else>
+                                     <span class="spanScore" :class="item | getColorClass('color')">{{item | addPlusFlag}}</span>
+											</span>-->
+
+										</li>
+											<li  onclick="clickDetail(item)">
+											<span class="spanTitle">定期问候</span>
+            			                    <span class="spanData">(56/100)</span>
+			                                <span class="spanPersent" :class="item | getColorClass">56%</span>
+											<span class="spanScore">
+                                     		<span>+10</span>
+											<!--<img @click="" src="../images/arrow.png">-->
+											</span>
+
+											<!--<span v-else-if="item.actionDefineName=='面访'" class="spanScore1">
+                                     <span>{{item.points}}</span>
+											</span>-->
+
+											<!--<span v-else>
+                                     <span class="spanScore" :class="item | getColorClass('color')">{{item | addPlusFlag}}</span>
+											</span>-->
+
+										</li>
+											<li  onclick="clickDetail(item)">
+											<span class="spanTitle">商机追踪</span>
+            			                    <span class="spanData">(60/100)</span>
+			                                <span class="spanPersent" :class="item | getColorClass">60%</span>
+											<span class="spanScore">
+                                     		<span>+10</span>
+											<!--<img @click="" src="../images/arrow.png">-->
+											</span>
+
+											<!--<span v-else-if="item.actionDefineName=='面访'" class="spanScore1">
+                                     <span>{{item.points}}</span>
+											</span>-->
+
+											<!--<span v-else>
+                                     <span class="spanScore" :class="item | getColorClass('color')">{{item | addPlusFlag}}</span>
+											</span>-->
+
+										</li>
+											<li  onclick="clickDetail(item)">
+											<span class="spanTitle">面访</span>
+            			                    <span class="spanData">(60/100)</span>
+			                                <span class="spanPersent" :class="item | getColorClass">60%</span>
+											<span class="spanScore">
+                                     		<span>+10</span>
+											<!--<img @click="" src="../images/arrow.png">-->
+											</span>
+
+											<!--<span v-else-if="item.actionDefineName=='面访'" class="spanScore1">
+                                     <span>{{item.points}}</span>
+											</span>-->
+
+											<!--<span v-else>
+                                     <span class="spanScore" :class="item | getColorClass('color')">{{item | addPlusFlag}}</span>
+											</span>-->
+
+										</li>
+										</li>
+											<li  onclick="clickDetail(item)">
+											<span class="spanTitle">分享响应</span>
+            			                    <!--<span class="spanData">(60/100)</span>
+			                                <span class="spanPersent" :class="item | getColorClass">60%</span>-->
+											<span class="spanScore">
+                                     		<span>+10</span>
+											<img @click="" src="img/arrow.png">
+											</span>
+
+											<!--<span v-else-if="item.actionDefineName=='面访'" class="spanScore1">
+                                     <span>{{item.points}}</span>
+											</span>-->
+
+											<!--<span v-else>
+                                     <span class="spanScore" :class="item | getColorClass('color')">{{item | addPlusFlag}}</span>
+											</span>-->
+
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="quality">
+								<div class="section">
+									<span @click="clickQuality">
+                            <span class="sectionTitle">品质</span>
+									<img src="img/question.png">
+									</span>
+								</div>
+								<div class="cell">
+									<ul>
+										<li >
+											<span class="spanTitle">合规/风险案件</span>
+											<span :class="'spanScore1'">-20</span>
+										</li>
+										<li >
+											<span class="spanTitle">客户投诉</span>
+											<span :class="'spanScore1'">-20</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="evaluate">
+								<div class="section">
+									<span @click="clickEvaluate">
+                            <span class="sectionTitle">主管评价</span>
+									<img src="img/question.png">
+									</span>
+								</div>
+								<div class="cell">
+									<ul>
+										<li>
+											<span class="spanTitle">主管评分</span>
+											<span class="spanScore1">+10</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!--<div v-show="showCustomernteractionExplainModal" class="customernteractionExplainContainer" @touchmove.self.prevent>
+							<div class="customernteractionExplainScroll">
+								<div class="customernteractionExplainHeader" @touchmove.prevent>
+									<span class="customernteractionExplainHeaderSpan">
+                           {{explainModalTitle}}
+                       </span>
+								</div>
+								<div class="customernteractionExplainContent">
+									<div class="customernteractionExplainUl">
+										<ul>
+											<li v-for="item in customernteractionExplain" :class="isCenter?'customernteractionExplainContainerLi2':'customernteractionExplainContainerLi'">
+												<div>
+													<span :class="isCenter?'customernteractionExplainTitleSpan2':'customernteractionExplainTitleSpan'">
+                                        {{item.title}}
+                                    </span>
+												</div>
+												<div>
+													<span class="customernteractionExplainContentSpan">
+                                        {{item.content}}
+                                    </span>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="customernteractionExplainFooter" @touchmove.prevent>
+									<div class="customernteractionExplainFooterButton">
+
+										<span class="customernteractionExplainFooterButtonSpan" @click="hiddenCustomernteractionExplainModal">
+                           知道了
+                       </span>
+									</div>
+								</div>
+
+							</div>
+						</div>-->
+					</div>
+
+				</div>
+
+			</div>
+		
+	</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<title>业绩首页</title>
+		<style>
+			body{
+				width: 100%;
+				height: 100%;
+				text-align: center;
+			}
+			.obligatuion{
+				
+				width:100px;
+				height:50px;
+				border: 1px solid #34A1FC;
+				float: left;
+				
+			}
+			#main{
+				box-sizing: border-box;
+				display: inline-block;
+				margin-top: 300px;
+			}
+		</style>
+		<script type="text/javascript">
+			var clientWidth = document.documentElement.clientWidth,
+				viewport = null,
+				viewportWidth = 'device-width',
+				viewportScale = 1,
+				normalWidth = 748;
+			if(clientWidth > normalWidth) {
+				viewport = document.getElementById('viewport');
+				viewportScale = clientWidth / normalWidth;
+				viewportWidth = normalWidth * (normalWidth / clientWidth);
+				viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+			} else if(clientWidth < normalWidth) {
+				viewport = document.getElementById('viewport');
+				viewportScale = clientWidth / normalWidth;
+				viewportWidth = normalWidth;
+				viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+			}
+//			var opts = {
+//				title:"责任积分",
+//				color:"#000000",
+//				backgroundColor:"#FFFFFF",
+//				fontSize:20,
+//				underlineVisible:true,
+//				leftButtonVisible:true,
+//				rightButtonVisible:true,
+//				rightButtonText:"问题反馈",
+//				rightButtonFontSize:16,
+//				rightButtonBackgroundColor:"#ffffff"
+//		}
+//			aladdin.header.config(opts,function(err){
+//				 if (err) {
+//				    aladdin.toast.show({ message:err.message });
+//				  }
+//		})
+	</script>
+	</head>
+	<body>
+		<div id="main">
+			<div class="obligatuion">
+				<a href="dutypoints/index.html">责任积分</a>
+			</div>
+			<div class="obligatuion">
+				<a href="salespoints/importantScore.html">关键积分</a>
+			</div>
+			<div class="obligatuion">
+				<a href="parameter/currentData.html">目前系数</a>
+			</div>
+			<div class="obligatuion">
+				<a href="salespoints/bonusScore.html">奖励积分</a>
+			</div>
+		</div>
+		
+	</body>
+</html>

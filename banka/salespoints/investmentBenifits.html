@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mine.css" />
+		<script src="../js/jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/aladdin.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/aladdin.aikeplatform.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/aladdin.ext.js" type="text/javascript" charset="utf-8"></script>
+		 <script src="../main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/depositBenifits.js" type="text/javascript" charset="utf-8"></script>
+	<!--	<script src="../commonJS/commonJS.js" type="text/javascript" charset="utf-8"></script>-->
+		<title></title>
+		<style>
+			.navbar * {
+				box-sizing: border-box;
+			}
+			
+			.navbar {
+				width: 100%;
+				height: 90px;
+				/*padding: 20px 21px 0;*/
+				/*position: absolute;
+            top: 0;
+            left: 0;*/
+				z-index: 900;
+				border-bottom: 1px solid #d1d1d1;
+				line-height: 88px;
+				background-color: #fff;
+				position: relative;
+			}
+			
+			.navbar .title {
+				height: 90px;
+				color: #000000;
+				font-size: 1.8rem;
+				font-weight: bold;
+				text-align: center;
+				/*				top: 0;*/
+				/*position: relative;*/
+				z-index: 900;
+			}
+			
+			.navbar .titleContent {
+				/*position: absolute; top: 8.5px; right: 0;*/
+				display: inline-block;
+				vertical-align: middle;
+				height: 60px;
+				border: 1px solid #f37938;
+				border-radius: 30px;
+			}
+			
+			.navbar .titleContent div {
+				float: left;
+				width: 199px;
+				height: 60px;
+				margin-top: -1px;
+				/*border: 1px solid #f37938;*/
+				border-radius: 30px;
+				font-size: 1.4rem;
+				line-height: 60px;
+			}
+			
+			.navbar .titleContent div.active {
+				color: #fffefe;
+				background-color: #f37938
+			}
+			
+			.navbar .leftButton,
+			.navbar .rightButton {
+				height: 87px;
+				line-height: 87px;
+				position: absolute;
+				z-index: 902;
+			}
+			
+			.navbar .leftButton {
+				left: 21px;
+			}
+			
+			.navbar .rightButton {
+				right: 21px;
+			}
+			
+			.navbar .leftButton i,
+			.navbar .rightButton i {
+				display: inline-block;
+				vertical-align: middle;
+				text-align: center;
+				line-height: 44px;
+				width: 44px;
+				height: 44px;
+			}
+			
+			.navbar .leftButton i img,
+			.navbar .rightButton i img {
+				line-height: 44px;
+				vertical-align: middle;
+			}
+			
+			.navbar .leftButton span,
+			.navbar .rightButton span {
+				vertical-align: middle;
+				font-size: 1.2rem;
+				color: #54b9ff;
+			}
+			
+			.contenter {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: transparent;
+			}
+			
+			body {
+				overflow: auto;
+			}
+		</style>
+		<script type="text/javascript">
+			var clientWidth = document.documentElement.clientWidth,
+				viewport = null,
+				viewportWidth = 'device-width',
+				viewportScale = 1,
+				normalWidth = 748;
+			if(clientWidth > normalWidth) {
+				viewport = document.getElementById('viewport');
+				viewportScale = clientWidth / normalWidth;
+				viewportWidth = normalWidth * (normalWidth / clientWidth);
+				viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+			} else if(clientWidth < normalWidth) {
+				viewport = document.getElementById('viewport');
+				viewportScale = clientWidth / normalWidth;
+				viewportWidth = normalWidth;
+				viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+			}
+
+			var opts = {
+				title: "存款创利",
+				color: "#000000",
+				backgroundColor: "#FFFFFF",
+				fontSize: '16px',
+				underlineVisible: true,
+				leftButtonText: '',
+				leftButtonVisible: true,
+				leftButtonFontSize: '16px',
+				rightButtonVisible: false,
+				rightButtonTextColor: "#34a1fc",
+				//rightButtonText:"问题反馈",
+				rightButtonText: "",
+				rightButtonFontSize: '16px',
+				rightButtonBackgroundColor: "#ffffff",
+				leftButtonIcon:"/sicaih5/dist/static/back.png",
+				leftButtonCallback:function(){aladdin.navigator.back()}
+				//rightButtonCallback:rightButtonCallback
+
+			}
+			aladdin.header.config(opts, function(err) {
+				if(err) {
+					aladdin.toast.show({
+						message: err.message
+					});
+				}
+			})
+
+		</script>
+	</head>
+
+	<body>
+		<main>
+			<div class='_total'>
+				<div>共创利<span id="cunkuan_total"></span>元</div>
+				<div id="dateUpdate">最近更新日期T+1</div>
+			</div>
+			<div class="cell" style='background-color: white;'>
+				<ul>
+					<li>   
+						<span class="spanTitle" style="margin-left: 0px;">类型</span>
+						<span class="spanScore1" style="margin-right: 0px;">创利</span>
+					</li>
+					<li onclick="gotoDetailProfitability('DECD')">
+						<span class="spanTitle" >大额存单</span>
+						<span class="spanScore1" id="greatmoney"></span>
+					</li >
+					<li onclick="gotoDetailProfitability('DHT')">
+						<span class="spanTitle">定活通</span>
+						<span class="spanScore1" id="dinghuotong"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('HQCK')">
+						<span class="spanTitle">活期存款</span>
+						<span class="spanScore1" id="demandmoney"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('BZJCK')">
+						<span class="spanTitle">保证金存款</span>
+						<span class="spanScore1" id="marginmoney"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('TZCK')">
+						<span class="spanTitle">通知存款</span>
+						<span class="spanScore1" id="infrommoney"></span>
+					</li>
+					<li onclick="gotoDetailProfitability('YBDQCK')">
+						<span class="spanTitle" >一般定期存款</span>
+						<span class="spanScore1" id="commonmoney"></span>
+					</li>
+				</ul>
+			</div>
+		</main>
+	</body>
+
+</html>

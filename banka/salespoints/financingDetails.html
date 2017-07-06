@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta id="viewport" name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+    <script src="../js/jquery-1.12.4.js"></script>
+    <script src="../js/aladdin.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/aladdin.aikeplatform.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/aladdin.ext.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../main.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/financingDetails.js"></script>
+    <title></title>
+    <script type="text/javascript">
+        var clientWidth = document.documentElement.clientWidth,
+                viewport = null,
+                viewportWidth = 'device-width',
+                viewportScale = 1,
+                normalWidth = 748;
+        if (clientWidth > normalWidth) {
+            viewport = document.getElementById('viewport');
+            viewportScale = clientWidth / normalWidth;
+            viewportWidth = normalWidth * (normalWidth / clientWidth);
+            viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+        } else if (clientWidth < normalWidth) {
+            viewport = document.getElementById('viewport');
+            viewportScale = clientWidth / normalWidth;
+            viewportWidth = normalWidth;
+            viewport.setAttribute('content', 'width=' + viewportWidth + ', initial-scale=' + viewportScale + ', maximum-scale=' + viewportScale + ', user-scalable=0');
+        }
+
+        var opts = {
+            title: "交易详情",
+            color: "#000000",
+            backgroundColor: "#FFFFFF",
+            fontSize: '16px',
+            underlineVisible: true,
+            leftButtonVisible: true,
+            leftButtonText: '',
+            leftButtonFontSize: '16px',
+            rightButtonVisible: false,
+            rightButtonText: "问题反馈",
+            rightButtonTextColor: "#34a1fc",
+            rightButtonFontSize: '16px',
+            rightButtonBackgroundColor: "#ffffff",
+            leftButtonIcon: "/sicaih5/dist/static/back.png",
+            leftButtonCallback: function () {
+                aladdin.navigator.back()
+            }
+
+
+        };
+        aladdin.header.config(opts, function (err) {
+            if (err) {
+                aladdin.toast.show({message: err.message});
+            }
+        })
+    </script>
+</head>
+<body style="overflow: scroll;">
+<!-- <header style="height:128px">
+    <nav class="navbar clearfix">
+        <div class="leftButton" onclick="leftClick">
+            <i v-if="leftIconShow"><img src="./back2.png"/></i><span v-text="leftText"></span>
+        </div>
+        <div class="rightButton" onclick="rightClick">
+            <span>问题反馈</span>
+        </div>
+        <div class="title">
+            <slot>
+                <span v-if="typeof title === 'string'" onclick="titleClick">大额存单</span>
+                <div v-else class="titleContent">
+                    <div v-for="(item, index) in title" :class="{active: item.active}"
+                         @click="titleClick(item.name, item.onclick)" v-text="item.title"
+                    ></div>
+            </slot>
+        </div>
+    </nav>
+</header> -->
+<main>
+    <div class='_total' id="dateUpdate">最近更新日期T+1</div>
+    <div class="showBox">
+        <div class="nameBox">
+            <div id="topName" class="topName">
+                <div class="name">--</div>
+                <div class="productName">--</div>
+            </div>
+        </div>
+        <div id="div_one" class="topDetails clearfix">
+            <ul class="clearfix">
+                <li>--
+                    <div>持有数量</div>
+                </li>
+                <li>--
+                    <div>币种</div>
+                </li>
+                <li>--
+                    <div>余额/市值(原币)</div>
+                </li>
+                <li>--
+                    <div>余额/市值(折人民币)</div>
+                </li>
+            </ul>
+            <ul class="clearfix">
+                <li>--
+                    <div>产品分类</div>
+                </li>
+                <li>--
+                    <div>上月销售中收</div>
+                </li>
+                <li>--
+                    <div>上月产品模拟收益率</div>
+                </li>
+                <li>--
+                    <div>交易流水号</div>
+                </li>
+            </ul>
+            <ul class="clearfix">
+                <li>--
+                    <div>开户支行</div>
+                </li>
+                <li>--
+                    <div>交易支行</div>
+                </li>
+                <li>--
+                    <div>归属支行</div>
+                </li>
+            </ul>
+        </div>
+        <div id="div_two" class="downDetails clearfix">
+            <ul class="clearfix">
+                <li>--
+                    <div>管户人</div>
+                </li>
+                <li>--
+                    <div>销售人</div>
+                </li>
+                <li>--
+                    <div>挂户人</div>
+                </li>
+            </ul>
+            <ul class="clearfix">
+                <li>--
+                    <div>管户分成比例</div>
+                </li>
+                <li>--
+                    <div>销售分成比例</div>
+                </li>
+                <li>--
+                    <div>挂户分成比例</div>
+                </li>
+            </ul>
+            <ul class="clearfix">
+                <li>--
+                    <div>管户所属机构</div>
+                </li>
+                <li>--
+                    <div>销售所属机构</div>
+                </li>
+                <li>--
+                    <div>挂户所属机构</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>

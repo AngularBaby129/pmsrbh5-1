@@ -1,0 +1,296 @@
+@charset "utf-8";
+/* CSS 重写默认样式 */
+*{ -webkit-overflow-scrolling: touch; font-family: "平方简细体","冬青简体",Arial;}
+body, div, ol, dl, dt, dd, ul, li, table, tr, td, h1, h2, h3, h4, h5, h6, p, form, input, button, img, strong, em {
+    padding: 0; margin: 0; border: 0; font-style: normal;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids,个人感觉是低版本的安卓，4.0以下 */
+}
+li, dd, dt { list-style-type: none;}
+ol, ul, dl { list-style: none;}
+img { vertical-align: top;}
+a{ color: #000; text-decoration: none; outline: 0;}
+/*::-webkit-scrollbar {width: 0px;} !* 隐藏wekkit内核浏览器的滚动条,但是可以滚动*!*/
+::-webkit-input-placeholder { color: #999;}
+::-moz-placeholder { color: #999; } /* firefox 19+ */
+:-ms-input-placeholder { color: #999; } /* ie */
+:-moz-placeholder { color: #999;} /* firefox 4 to 18 */
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0 none; margin: 0; padding: 0;}
+input, select, option, button, textarea {
+    font-size: 100%; vertical-align: middle; outline: 0 none; border-radius: 0px; border: none; background: transparent;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+}
+
+/* 清除浮动样式 */
+.clear { clear: both; height: 0; width: 100%;}
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0;}
+.clearfix { zoom: 1; clear: both;}
+.left { float: left;}
+.right { float: right;}
+
+* {box-sizing: border-box}
+html, body{
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    overflow: scroll;
+}
+/* 屏幕适配 */
+@media screen and (max-width:360px){
+    html{ font-size: 14px!important;}
+}
+@media screen and (min-width:361px) and (max-width:480px){
+    html{ font-size: 16px!important;}
+}
+@media screen and (min-width:481px) and (max-width:640px){
+    html{ font-size: 18px!important;}
+}
+@media screen and (min-width:641px) and (max-width:750px){
+    html{ font-size: 20px!important;}
+}
+@media screen and (min-width:751px){
+    html{ font-size: 24px!important;}
+}
+
+
+/* 公共样式 */
+.wrap{
+    width:100%;
+    background-color:#f5f5f5;
+    height: 100%;
+    padding-top: 128px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-top: 1px solid #d1d1d1;
+
+}
+.main{
+    background-color: #f5f5f5;
+    width: 100%;
+    /*height: 400px;*/
+    /*height: 100%;*/
+    position: relative;
+    padding-top: 128px;
+}
+
+/* 弹框样式 */
+.rDialog {
+    position: fixed;
+    _position: absolute;
+}
+.rDialog-header-load {
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 100%;
+    width: 89px;
+    height: 282px;
+    margin: auto;
+}
+.rDialog-header-alert,.rDialog-header-ok {
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 50px;
+    height: 53px;
+    margin: auto;
+}
+.rDialog-header-alert{
+    background-position: 0 -53px;
+}
+.rDialog-header-ok {
+    background-position: 0 0;
+}
+.rDialog-content {
+    padding: 1em 1em;
+    font-size: 20px;
+    color: #FFF;
+    overflow: hidden;
+    text-align: center;
+}
+.rDialog-footer {
+    padding-left: 15px;
+    text-align: center;
+}
+.rDialog-footer a {
+    display: inline-block;
+    margin: 0 15px 15px 0;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 30px;
+    font-size: 0.8em;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.rDialog-footer a:link, .rDialog-footer a:visited, .rDialog-footer a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.rDialog-ok,.rDialog-ok:hover {
+    background: #FBA733;
+    color: #fff;
+}
+.rDialog-cancel,.rDialog-cancel:hover  {
+    background: #E6E6E6;
+    color: #A7A7A7;
+}
+.rDialog-mask {
+    position: fixed;
+    _position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+.ceng em.icon-none {
+    background:none;
+}
+.letter-active{
+    color:#fff;
+    background: #666;
+}
+.rDialog .preview-photo{
+    display: block;
+    position: relative;
+    vertical-align: middle;
+    background:rgba(0,0,0,0.5);
+}
+.rDialog .preview-photo b{
+    display: inline-block;
+    background: url("../images/close.png") no-repeat;
+    width:80px;
+    height:80px;
+    position: absolute;
+    top: 870px;
+    left:334px;
+}
+.rDialog .preview-photo div{
+    display: inline-block;
+}
+.rDialog .preview-photo .swiper-container{
+    height: 820px;
+    margin-top: 80px;
+}
+.preview-photo .swiper-container .swiper-wrapper{
+    height: 770px;
+}
+.rDialog .preview-photo img{
+    height: 100%;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    display: inline-block;
+}
+.ceng{
+    display:inline-block;
+    position: absolute;
+    color: #fff;
+    min-height: 140px;
+    width: 400px;
+    text-align: center;
+    left:0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #000;
+    background-color:rgba(0,0,0,0.6);
+    padding:50px;
+}
+.ceng p{
+    color: #fff;
+    font-size: 28px;
+    line-height: 54px;
+    -webkit-box-pack: center;
+    text-align: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.cengWarp{
+    position: fixed;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    background-color:rgba(0,0,0,0.45);
+    left: 0; top: 0;
+}
+.cengContent{
+    width: 400px;
+    min-height: 200px;
+    position: absolute;
+    margin:-200px 0 0 -200px;
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+    border-radius: 20px;
+}
+.cengContent button{
+    width:50%;
+    height: 100px;
+    font-size: 32px;
+    line-height: 100px;
+    color: #1c83f6;
+    display: inline-block;
+    background-color: transparent;
+}
+.cengContent button:nth-child(2){
+    color: #1c83f6;
+    border-right:1px solid #e7e7ec;
+}
+
+.cenAlert button:nth-child(2){
+    width: 100%;
+    border: 0;
+    text-align: center;
+}
+.cengContent p{
+    min-height: 133px;
+    text-align: center;
+    font-size: 28px;
+    color: #999;
+    border-bottom:1px solid #e7e7ec;
+    line-height: 48px;
+    padding:20px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.rDialog .swiper-pagination-bullet{
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    background-color:#fff;
+    opacity: .9!important;
+    margin-right: 3px;
+    border: 1px solid #000;
+}
+.rDialog .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    background-color:#000;
+}
+.rDialog .swiper-pagination{
+    /*text-align: left;
+    padding-left:26%;*/
+    top: 770px;
+    width: 100%;
+    text-align: center
+}
